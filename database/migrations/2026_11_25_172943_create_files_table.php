@@ -15,8 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('file_path');
         $table->string('file_name');
-        $table->foreignId('task_id')->constrained('tasks')->onDelete('cascade');
-        $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Uploader    
+        $table->morphs('fileable'); // Creates fileable_id and fileable_type
         $table->timestamps();
     });
     }
