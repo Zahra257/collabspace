@@ -16,7 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('role')->default('team_member'); // admin, manager, team_member
+            $table->string('job_title')->nullable();
+            $table->string('phone')->nullable();
+            $table->integer('experience_years')->nullable();
+            $table->string('avatar')->nullable();
+            $table->enum('availability_status', ['available', 'busy', 'offline'])->default('available');
             $table->rememberToken();
             $table->timestamps();
         });
