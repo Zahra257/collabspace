@@ -53,6 +53,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class)->withTimestamps();
+    }   
   
     // Projects the user is a guest/member of
     public function projects()

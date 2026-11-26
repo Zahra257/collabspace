@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-    protected $fillable = ['file_path', 'file_name', 'user_id', 'fileable_id', 'fileable_type'];
+    protected $fillable = ['file_path', 'file_name', 'fileable_id', 'fileable_type'];
 
     // Polymorphic relation: Can belong to a Project or a Task
     public function fileable()

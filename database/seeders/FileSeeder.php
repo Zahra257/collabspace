@@ -29,22 +29,20 @@ class FileSeeder extends Seeder
                 File::create([
                     'file_path'     => 'uploads/' . uniqid() . '.pdf',
                     'file_name'     => $fileNames[array_rand($fileNames)],
-                    'user_id'       => $users->random()->id,
                     'fileable_id'   => $project->id,
                     'fileable_type' => Project::class,
                 ]);
             }
         }
 
-        // Fichiers liés aux tâches
-        foreach (Task::all() as $task) {
+        // Fichiers liés aux utilisateurs
+        foreach (User::all() as $user) {
             if (rand(0, 1)) {
                 File::create([
                     'file_path'     => 'uploads/' . uniqid() . '.png',
                     'file_name'     => $fileNames[array_rand($fileNames)],
-                    'user_id'       => $users->random()->id,
-                    'fileable_id'   => $task->id,
-                    'fileable_type' => Task::class,
+                    'fileable_id'   => $user->id,
+                    'fileable_type' => User::class,
                 ]);
             }
         }
