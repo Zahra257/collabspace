@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->default('team_member'); // admin, manager, team_member
             $table->string('job_title')->nullable();

@@ -8,11 +8,7 @@ class Team extends Model
 {
     protected $fillable = ['name', 'description'];
 
-    // Users in this team
-    public function users()
-    {
-        return $this->belongsToMany(User::class)->withPivot('role')->withTimestamps();
-    }
+
 
     // Projects assigned to this team
     public function projects()
