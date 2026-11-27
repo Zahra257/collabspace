@@ -13,9 +13,10 @@ class MeetingController extends BaseController
         $meetings = Meeting::with(['project:id,name', 'users:id,name,avatar'])
             ->withCount('users')
             ->when($request->project_id, fn ($q) => $q->where('project_id', $request->project_id))
-            ->when($request->from, fn ($q) => $q->where('start_time', '>=', $request->from))
-            ->when($request->to, fn ($q) => $q->where('start_time', '<=', $request->to))
-            ->orderBy('start_time')
+            ->when($request->from, fn ($q) => $q->where('date', '>=', $request->from))
+            ->when($request->to, fn ($q) => $q->where('date', '<=', $request->to))
+            ->orderBy('date')
+            ->orderBy('time')
             ->paginate($request->per_page ?? 15);
 
         return $this->success($meetings);

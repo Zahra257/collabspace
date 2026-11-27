@@ -12,7 +12,7 @@ class TaskController extends BaseController
     {
         $tasks = Task::with(['project:id,name', 'team:id,name', 'assignee:id,name,avatar'])
             ->withCount(['comments', 'files', 'checklistItems'])
-            ->when($request->search, fn ($q) => $q->where('title', 'like', "%{$request->search}%"))
+            ->when($request->search, fn ($q) => $q->where('name', 'like', "%{$request->search}%"))
             ->when($request->project_id, fn ($q) => $q->where('project_id', $request->project_id))
             ->when($request->team_id, fn ($q) => $q->where('team_id', $request->team_id))
             ->when($request->status, fn ($q) => $q->where('status', $request->status))

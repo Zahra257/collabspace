@@ -15,12 +15,13 @@ use App\Http\Controllers\Api\V1\TeamController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Broadcast;
 
 Route::prefix('v1')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 
-  //  Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/me', [AuthController::class, 'me']);
         Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
@@ -41,9 +42,11 @@ Route::prefix('v1')->group(function () {
         Route::patch('/notifications/read-all', [NotificationController::class, 'markAllAsRead']);
         Route::patch('/notifications/{notification}/read', [NotificationController::class, 'markAsRead']);
         Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy']);
-    //});
+    });
 });
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+Broadcast::routes(['middleware' => ['auth:sanctum']]);

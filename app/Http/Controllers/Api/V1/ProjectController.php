@@ -11,7 +11,7 @@ class ProjectController extends BaseController
     public function index(Request $request)
     {
         $projects = Project::with('teams:id,name')
-            ->withCount(['tasks', 'users', 'teams'])
+              ->withCount(['users', 'teams'])
             ->when($request->search, fn ($q) => $q->where('name', 'like', "%{$request->search}%"))
             ->when($request->status, fn ($q) => $q->where('status', $request->status))
             ->when($request->priority, fn ($q) => $q->where('priority', $request->priority))

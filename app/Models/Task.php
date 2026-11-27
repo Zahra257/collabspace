@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [
-        'title', 'description', 'project_id', 'team_id', 'user_id', 
+        'name', 'description', 'project_id', 'team_id', 'user_id', 
         'status', 'priority', 'start_date', 'due_date'
     ];
 
+    
     public function project()
     {
         return $this->belongsTo(Project::class);
@@ -18,7 +19,7 @@ class Task extends Model
 
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class , 'team_id');
     }
 
     // The main person responsible for the task

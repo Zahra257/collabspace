@@ -21,9 +21,13 @@ class MeetingRequest extends FormRequest
                 'string',
                 'max:255',
             ],
-            'start_time' => [
+            'date' => [
                 $isUpdate ? 'sometimes' : 'required',
-                'date',
+                'date_format:Y-m-d',
+            ],
+            'time' => [
+                $isUpdate ? 'sometimes' : 'required',
+                'date_format:H:i',
             ],
             'duration_minutes' => [
                 $isUpdate ? 'sometimes' : 'required',
